@@ -16,8 +16,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final String EMP_ID = "_id";
     private static final String EMP_NAME = "name";
     private static final String EMP_AGE = "age";
-    private static final int  DB_VERSION = 1;
-    private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+"("+EMP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+EMP_NAME+" VARCHAR(255), "+EMP_AGE+" INTEGER);";
+    private static final String GENDER = "gender";
+    private static final int DB_VERSION = 4;
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + EMP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EMP_NAME + " VARCHAR(255), " + EMP_AGE + " INTEGER, " + GENDER + " VARCHAR(25));";
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     private Context context;
 
@@ -30,11 +32,11 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         try {
-             sqLiteDatabase.execSQL(CREATE_TABLE);
-            Toast.makeText(context," OnCreate is Called " ,Toast.LENGTH_LONG).show();
+            sqLiteDatabase.execSQL(CREATE_TABLE);
+            Toast.makeText(context, " OnCreate is Called ", Toast.LENGTH_LONG).show();
 
-        }catch (Exception e){
-            Toast.makeText(context," Exception "+e ,Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(context, " Exception " + e, Toast.LENGTH_LONG).show();
         }
 
 
@@ -42,6 +44,17 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+
+        try {
+            sqLiteDatabase.execSQL(DROP_TABLE);
+            onCreate(sqLiteDatabase);
+            Toast.makeText(context, " onUpgrade is Called ", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e) {
+            Toast.makeText(context, " Exception " + e, Toast.LENGTH_LONG).show();
+
+        }
 
     }
 }
