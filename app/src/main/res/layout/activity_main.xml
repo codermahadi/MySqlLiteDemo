@@ -66,4 +66,12 @@
         android:id="@+id/insert"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_data"
+        android:id="@+id/showData"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
 </LinearLayout>

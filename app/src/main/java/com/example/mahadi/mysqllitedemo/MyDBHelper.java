@@ -2,6 +2,7 @@ package com.example.mahadi.mysqllitedemo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 4;
     private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + EMP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + EMP_NAME + " VARCHAR(255), " + EMP_AGE + " INTEGER, " + GENDER + " VARCHAR(25));";
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    private static final String FATCH_ALL = "SELECT * FROM " + TABLE_NAME;
 
     private Context context;
 
@@ -72,5 +74,13 @@ public class MyDBHelper extends SQLiteOpenHelper {
         long rowId  = db.insert(TABLE_NAME,null, contentValues);
         return rowId;
 
+    }
+
+    public Cursor fatchAllData(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(FATCH_ALL,null);
+
+        return cursor;
     }
 }
