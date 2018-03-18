@@ -1,5 +1,6 @@
 package com.example.mahadi.mysqllitedemo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -55,6 +56,21 @@ public class MyDBHelper extends SQLiteOpenHelper {
             Toast.makeText(context, " Exception " + e, Toast.LENGTH_LONG).show();
 
         }
+
+    }
+
+//    Data Insert Method Here
+
+    public long addData(String name, String age, String gender){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EMP_NAME, name);
+        contentValues.put(EMP_AGE, age);
+        contentValues.put(GENDER, gender);
+
+        long rowId  = db.insert(TABLE_NAME,null, contentValues);
+        return rowId;
 
     }
 }
