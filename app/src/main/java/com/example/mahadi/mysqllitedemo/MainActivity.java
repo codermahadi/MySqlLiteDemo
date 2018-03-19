@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     MyDBHelper myDBHelper;
 
-    private EditText name, age, gender;
-    private Button insert, fatchData;
+    private EditText name, age, gender, emp_id;
+    private Button insert, fatchData, update_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = (EditText) findViewById(R.id.name);
         age = (EditText) findViewById(R.id.age);
         gender = (EditText) findViewById(R.id.gdr);
+        emp_id = (EditText) findViewById(R.id.id);
 
         insert = (Button) findViewById(R.id.insert);
         fatchData = (Button) findViewById(R.id.showData);
+        update_btn = (Button) findViewById(R.id.updateData);
 
         insert.setOnClickListener(this);
         fatchData.setOnClickListener(this);
+        update_btn.setOnClickListener(this);
 
 
     }
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String empName = name.getText().toString();
         String empAge = age.getText().toString();
         String empGender = gender.getText().toString();
+        String empId = emp_id.getText().toString();
 
         if (view.getId() == R.id.insert) {
 
@@ -67,16 +71,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showData("Error !", "Result Not found!");
                 return;
             } else {
-                    StringBuffer stringBuffer = new StringBuffer();
+                StringBuffer stringBuffer = new StringBuffer();
 
-                    while (resSet.moveToNext()){
-                        stringBuffer.append("ID : "+ resSet.getString(0)+"\n");
-                        stringBuffer.append("Name : "+ resSet.getString(1)+"\n");
-                        stringBuffer.append("Age : "+ resSet.getString(2)+"\n");
-                        stringBuffer.append("Gender : "+ resSet.getString(3)+"\n");
-                    }
+                while (resSet.moveToNext()) {
+                    stringBuffer.append("ID : " + resSet.getString(0) + "\n");
+                    stringBuffer.append("Name : " + resSet.getString(1) + "\n");
+                    stringBuffer.append("Age : " + resSet.getString(2) + "\n");
+                    stringBuffer.append("Gender : " + resSet.getString(3) + "\n");
+                }
 
-                    showData("Result Set : ", stringBuffer.toString());
+                showData("Result Set : ", stringBuffer.toString());
+            }
+
+        } else if (view.getId() == R.id.updateData) {
+
+            boolean res = myDBHelper.updateDate(empId, empName, empAge, empGender);
+
+            if (res == true) {
+                Toast.makeText(getBaseContext(), " Update Success " + res, Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(getBaseContext(), " Update Not Success " + res, Toast.LENGTH_LONG).show();
+
             }
 
         }

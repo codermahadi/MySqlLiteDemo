@@ -5,4 +5,6 @@
     <string name="gender">Gender</string>
     <string name="insert">Insert</string>
     <string name="show_data">Show Data</string>
+    <string name="update">Update</string>
+    <string name="emp_id">EMP ID</string>
 </resources>
