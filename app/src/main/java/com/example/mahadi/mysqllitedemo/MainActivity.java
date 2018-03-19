@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MyDBHelper myDBHelper;
 
     private EditText name, age, gender, emp_id;
-    private Button insert, fatchData, update_btn;
+    private Button insert, fatchData, update_btn, delete_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         insert = (Button) findViewById(R.id.insert);
         fatchData = (Button) findViewById(R.id.showData);
         update_btn = (Button) findViewById(R.id.updateData);
+        delete_btn = (Button) findViewById(R.id.deleteData);
 
         insert.setOnClickListener(this);
         fatchData.setOnClickListener(this);
         update_btn.setOnClickListener(this);
+        delete_btn.setOnClickListener(this);
 
 
     }
@@ -92,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             } else {
                 Toast.makeText(getBaseContext(), " Update Not Success " + res, Toast.LENGTH_LONG).show();
+
+            }
+
+        }else if (view.getId() == R.id.deleteData) {
+
+            int res = myDBHelper.deleteData(empId);
+
+            if (res == 0) {
+                Toast.makeText(getBaseContext(), " Delete Not Success " + res, Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(getBaseContext(), " Delete Success " + res, Toast.LENGTH_LONG).show();
 
             }
 

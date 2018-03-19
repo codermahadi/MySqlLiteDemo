@@ -99,5 +99,14 @@ public class MyDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public int deleteData(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+       int res =  db.delete(TABLE_NAME, EMP_ID+" = ?", new String[]{id});
+
+        return res;
+    }
+
 
 }
