@@ -1,5 +1,7 @@
 package com.example.mahadi.mysqllitedemo;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-        }else if (view.getId() == R.id.deleteData) {
+        } else if (view.getId() == R.id.deleteData) {
 
             int res = myDBHelper.deleteData(empId);
 
@@ -118,6 +120,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(title);
         dialog.setMessage(resultSet);
+        dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                Intent i = new Intent(MainActivity.this, ListViewActivity.class);
+                startActivity(i);
+            }
+        });
         dialog.setCancelable(true);
         dialog.show();
     }
